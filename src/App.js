@@ -297,7 +297,7 @@ function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary}) {
                 {editedValue==index
                 ?
                   <>
-                  <form> 
+                  <form>
                     <input onChange ={(e) => setNewSkillName(e.target.value)} defaultValue = {skill} type="text" name="skill" id="skill" />
                     <input onChange ={(e) => setNewSkillValue(e.target.value)} defaultValue = {user.skills[skill]} type="text" name="skillValue" id="skillValue"/>
                     <input type="submit" onClick={(e) => editUserSkills(e,index)}/>
