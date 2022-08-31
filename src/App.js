@@ -145,9 +145,15 @@ function App() {
     }
   };
 
+  const editUser = (e, index, newValue, key) => {
+    e.preventDefault();
+    usersData[index][key] = newValue;
+    //setEditedValue();
+  };
+
   return (
     <div className="App">
-      <FirstTask users={usersData} deleteUser={deleteUser} deleteAllUsers={deleteAllUsers} sortBySalary={sortBySalary} />
+      <FirstTask users={usersData} deleteUser={deleteUser} deleteAllUsers={deleteAllUsers} sortBySalary={sortBySalary} editUser={editUser} />
       <Form updateUsers={updateUsers} />
     </div>
   );
