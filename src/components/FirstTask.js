@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import SortTable from "./SortTable";
 import DeleteUserButton from "./DeleteUserButton";
 import FourthTask from "./FourthTask";
 import EditUserValue from "./EditUserValue";
 import EditUserSkills from "./EditUserSkills";
+import AddSkillBtn from "./AddSkillBtn";
 
-function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser }) {
+function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser, editSkills, deleteSkill, addSkill, skillNames, salarySum, sumUserSkills, sumSalary }) {
   const [editState, setEditState] = useState(0);
   if (typeof users === "undefined") {
     return (
@@ -42,8 +42,13 @@ function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser }
                 <EditUserValue userData={user.name} index={index} editUser={editUser} name="name" state={editState} setEditState={setEditState} />
                 <EditUserValue userData={user.surname} index={index} editUser={editUser} name="surname" state={editState} setEditState={setEditState} />
                 <EditUserValue userData={user.salary} index={index} editUser={editUser} name="salary" state={editState} setEditState={setEditState} />
-                {/* to do edycje skilli i usuwanie skilli a nastepenie refactor z contexy */}
-                <EditUserSkills userData={user} index={index} editUser={editUser} skillName="skillName" skillValue="skillValue" state={editState} setEditState={setEditState} />
+                {/* to do edycje skilli i usuwanie skilli a nastepenie refactor z contexty */}
+                <td>
+                  {Object.keys(user.skills).map((skill) => (
+                    <EditUserSkills sumUserSkills={sumUserSkills} skillNames={skillNames} users={users} userData={user} index={index} editUser={editUser} skill={skill} state={editState} setEditState={setEditState} editSkills={editSkills} deleteSkill={deleteSkill} />
+                  ))}
+                  <AddSkillBtn addSkill={addSkill} userData={user} index={index} editUser={editUser} state={editState} setEditState={setEditState} editSkills={editSkills} />
+                </td>
                 <td>
                   <DeleteUserButton deleteUser={deleteUser} index={index} />
                 </td>
@@ -51,7 +56,7 @@ function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser }
             </tbody>
           );
         })}
-        <FourthTask users={users} deleteAllUsers={deleteAllUsers} />
+        <FourthTask skillNames={skillNames} salarySum={salarySum} sumUserSkills={sumUserSkills} sumSalary={sumSalary} state={editState} setEditState={setEditState} users={users} deleteAllUsers={deleteAllUsers} />
       </table>
     </div>
   );

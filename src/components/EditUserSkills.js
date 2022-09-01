@@ -1,44 +1,57 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-const EditUserSkills = ({ userData, index }) => {
+const EditUserSkills = ({ users, userData, index, skill, state, setEditState, editSkills, deleteSkill, skillNames, sumUserSkills }) => {
   const [newSkillName, setNewSkillName] = useState();
   const [newSkillValue, setNewSkillValue] = useState();
-  const [editedSkillValue, setEditedSkillValue] = useState();
 
-  const editUserSkills = (e, index) => {
-    e.preventDefault();
-    userData[index].skills[newSkillName] = newSkillValue;
-  };
+  useEffect(() => {
+    sumUserSkills(users);
+  }, [users]);
 
   return (
-    <td>
-      <ol>
-        {Object.keys(userData.skills).map((skill) => {
-          return (
-            <li
+    <>
+      {state != index + skill ? (
+        <ul>
+          <li
+            onClick={(e) => {
+              setEditState(index + skill);
+              setNewSkillName(skill);
+              setNewSkillValue(userData.skills[skill]);
+            }}
+          >
+            {skill + ": " + userData.skills[skill]}
+          </li>
+        </ul>
+      ) : (
+        <td
+          onClick={(e) => {
+            setNewSkillName(skill);
+            setNewSkillValue(userData.skills[skill]);
+          }}
+        >
+          <form>
+            {newSkillName}
+            <input onChange={(e) => setNewSkillValue(e.target.value)} defaultValue={newSkillValue} type="number" name={userData.skills[skill]} id="name" />
+            <input
+              type="submit"
               onClick={(e) => {
-                setEditedSkillValue(index);
-                setNewSkillName(skill);
-                setNewSkillValue(userData.skills[skill]);
+                editSkills(e, index, newSkillName, newSkillValue);
+                setEditState(0);
+              }}
+            />
+            <button
+              onClick={(e) => {
+                deleteSkill(e, index, newSkillName);
+                setEditState(0);
               }}
             >
-              {editedSkillValue == index ? (
-                <>
-                  <form>
-                    <input onChange={(e) => setNewSkillName(e.target.value)} defaultValue={skill} type="text" name="skill" id="skill" />
-                    <input onChange={(e) => setNewSkillValue(e.target.value)} defaultValue={userData.skills[skill]} type="text" name="skillValue" id="skillValue" />
-                    <input type="submit" onClick={(e) => editUserSkills(e, index)} />
-                  </form>
-                </>
-              ) : (
-                skill + ": " + userData.skills[skill]
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </td>
+              X
+            </button>
+          </form>
+        </td>
+      )}
+    </>
   );
 };
 

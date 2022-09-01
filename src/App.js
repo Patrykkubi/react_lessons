@@ -151,9 +151,69 @@ function App() {
     //setEditedValue();
   };
 
+  const editSkills = (e, index, newSkillName, newSkillValue) => {
+    e.preventDefault();
+    usersData[index].skills[newSkillName] = newSkillValue;
+    console.log(usersData);
+  };
+
+  const deleteSkill = (e, index, skillName) => {
+    e.preventDefault();
+    delete usersData[index].skills[skillName];
+  };
+
+  const addSkill = (e, index, skillName, skillValue) => {
+    e.preventDefault();
+    if (!(skillName in usersData[index].skills)) {
+      usersData[index].skills[skillName] = skillValue;
+    } else {
+      alert("This skill already exists");
+    }
+  };
+
+  const [salarySum, setSalarySum] = useState();
+  const [skillNames, setSkillNames] = useState({});
+  let skillOccurance = {};
+
+  const sumSalary = (users) => {
+    let usersCopy = [...users];
+    const salarySum = usersCopy.reduce((prev, curr) => {
+      return parseInt(prev) + parseInt(curr.salary);
+    }, 0);
+    setSalarySum(salarySum);
+  };
+
+  const sumUserSkills = (users) => {
+    const keyValue = [];
+    users.map((users) => {
+      Object.keys(users.skills).forEach((newValue, index) => {
+        if (!keyValue.includes(newValue)) {
+          keyValue.push(newValue);
+          skillOccurance[newValue] = 1;
+        } else {
+          skillOccurance[newValue] = skillOccurance[newValue] + 1;
+        }
+      });
+    });
+    setSkillNames(skillOccurance);
+  };
+
   return (
     <div className="App">
-      <FirstTask users={usersData} deleteUser={deleteUser} deleteAllUsers={deleteAllUsers} sortBySalary={sortBySalary} editUser={editUser} />
+      <FirstTask
+        salarySum={salarySum}
+        skillNames={skillNames}
+        sumSalary={sumSalary}
+        sumUserSkills={sumUserSkills}
+        users={usersData}
+        deleteUser={deleteUser}
+        deleteAllUsers={deleteAllUsers}
+        sortBySalary={sortBySalary}
+        editUser={editUser}
+        editSkills={editSkills}
+        deleteSkill={deleteSkill}
+        addSkill={addSkill}
+      />
       <Form updateUsers={updateUsers} />
     </div>
   );
