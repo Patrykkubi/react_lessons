@@ -39,11 +39,11 @@ function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser, 
           return (
             <tbody key={index}>
               <tr>
-                <EditUserValue userData={user.name} index={index} editUser={editUser} name="name" state={editState} setEditState={setEditState} />
-                <EditUserValue userData={user.surname} index={index} editUser={editUser} name="surname" state={editState} setEditState={setEditState} />
-                <EditUserValue userData={user.salary} index={index} editUser={editUser} name="salary" state={editState} setEditState={setEditState} />
+                <EditUserValue sumSalary={sumSalary} users={users} userData={user.name} index={index} editUser={editUser} name="name" state={editState} setEditState={setEditState} />
+                <EditUserValue sumSalary={sumSalary} users={users} userData={user.surname} index={index} editUser={editUser} name="surname" state={editState} setEditState={setEditState} />
+                <EditUserValue sumSalary={sumSalary} users={users} userData={user.salary} index={index} editUser={editUser} name="salary" state={editState} setEditState={setEditState} />
                 {/* to do edycje skilli i usuwanie skilli a nastepenie refactor z contexty */}
-                <td>
+                <td className="skills">
                   {Object.keys(user.skills).map((skill) => (
                     <EditUserSkills sumUserSkills={sumUserSkills} skillNames={skillNames} users={users} userData={user} index={index} editUser={editUser} skill={skill} state={editState} setEditState={setEditState} editSkills={editSkills} deleteSkill={deleteSkill} />
                   ))}

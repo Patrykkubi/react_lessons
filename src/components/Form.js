@@ -28,7 +28,7 @@ const Form = ({ updateUsers }) => {
     e.preventDefault();
     console.log(formData);
     updateUsers(formData);
-    setUserSkillNames();
+    setUserSkillNames([]);
     setFormData({ ...formData, skills: {} });
   };
 
@@ -36,11 +36,11 @@ const Form = ({ updateUsers }) => {
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name</label>
-        <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} value={formData.name} type="text" name="name" id="name" />
+        <input onChange={(e) => setFormData({ ...formData, name: e.target.value })} value={formData.name} type="text" name="name" id="name" required />
         <label htmlFor="body">Surname</label>
-        <input onChange={(e) => setFormData({ ...formData, surname: e.target.value })} value={formData.surname} type="text" name="surname" id="surname" />
+        <input onChange={(e) => setFormData({ ...formData, surname: e.target.value })} value={formData.surname} type="text" name="surname" id="surname" required />
         <label htmlFor="title">Salary</label>
-        <input onChange={(e) => setFormData({ ...formData, salary: e.target.value })} value={formData.salary} type="text" name="salary" id="salary" />
+        <input onChange={(e) => setFormData({ ...formData, salary: e.target.value })} value={formData.salary} type="number" name="salary" id="salary" required />
 
         <label htmlFor="skillName">Skill Name</label>
         <input onChange={(e) => setSkillName(e.target.value)} value={skillName} type="text" name="skillName" id="skillName" />
@@ -50,7 +50,6 @@ const Form = ({ updateUsers }) => {
           onClick={(e) => {
             addSkills(e);
             setUserSkillNames([...userSkillNames, skillName + ": " + skillValue + " "]);
-            // setUserSkillValues([...userSkillValues, skillValue]);
           }}
           type="button"
           value="Dodaj umiejetnosc"

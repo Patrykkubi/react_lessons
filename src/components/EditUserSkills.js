@@ -7,7 +7,7 @@ const EditUserSkills = ({ users, userData, index, skill, state, setEditState, ed
 
   useEffect(() => {
     sumUserSkills(users);
-  }, [users]);
+  }, [users[index].skills[newSkillName]]);
 
   return (
     <>
@@ -43,6 +43,7 @@ const EditUserSkills = ({ users, userData, index, skill, state, setEditState, ed
             <button
               onClick={(e) => {
                 deleteSkill(e, index, newSkillName);
+                sumUserSkills(users);
                 setEditState(0);
               }}
             >

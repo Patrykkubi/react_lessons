@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useEffect } from "react";
 
-const EditUserValue = ({ userData, editUser, index, name, state, setEditState }) => {
+const EditUserValue = ({ users, userData, editUser, index, name, state, setEditState, sumSalary }) => {
   const [newValue, setNewValue] = useState();
+
+  useEffect(() => {
+    sumSalary(users);
+  }, [users[index].salary]);
 
   return (
     <>
@@ -26,7 +30,7 @@ const EditUserValue = ({ userData, editUser, index, name, state, setEditState })
           }}
         >
           <form>
-            <input onChange={(e) => setNewValue(e.target.value)} defaultValue={newValue} type="text" name={name} id="name" />
+            <input onChange={(e) => setNewValue(e.target.value)} defaultValue={newValue} type={name == "salary" ? "number" : "text"} name={name} id="name" />
             <input
               type="submit"
               onClick={(e) => {

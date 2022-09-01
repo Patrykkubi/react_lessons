@@ -35,3 +35,10 @@ form {
   justify-content: center;
   align-items: center;
 }
+
+.skills{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

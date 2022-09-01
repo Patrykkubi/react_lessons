@@ -178,6 +178,9 @@ function App() {
   const sumSalary = (users) => {
     let usersCopy = [...users];
     const salarySum = usersCopy.reduce((prev, curr) => {
+      if (curr == "undefined") {
+        curr = 0;
+      }
       return parseInt(prev) + parseInt(curr.salary);
     }, 0);
     setSalarySum(salarySum);
