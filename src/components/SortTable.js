@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
+import TableContext from "./TableContext";
 
-const SortTable = ({ sortBySalary, users }) => {
-  const [state, setState] = useState(1);
+const SortTable = ({usersData}) => {
+
+const {sortBySalary} = useContext(TableContext);
+const [state, setState] = useState(1);
 
   const sortTable = () => {
     if (state == 1) {
-      sortBySalary(state, users);
+      sortBySalary(state, usersData);
     } else if (state == 2) {
-      sortBySalary(state, users);
+      sortBySalary(state, usersData);
     } else if (state == 3) {
-      sortBySalary(state, users);
+      sortBySalary(state, usersData);
       setState(1);
     }
   };

@@ -1,14 +1,20 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { useEffect } from "react";
 import SortTable from "./SortTable";
 import DeleteUserButton from "./DeleteUserButton";
 import FourthTask from "./FourthTask";
 import EditUserValue from "./EditUserValue";
 import EditUserSkills from "./EditUserSkills";
 import AddSkillBtn from "./AddSkillBtn";
+import TableContext from "./TableContext";
 
-function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser, editSkills, deleteSkill, addSkill, skillNames, salarySum, sumUserSkills, sumSalary }) {
+
+function FirstTask( ) {
   const [editState, setEditState] = useState(0);
-  if (typeof users === "undefined") {
+  const {usersData} = useContext(TableContext);
+  
+  if (typeof usersData === "undefined") {
     return (
       <div className="tableWrapper">
         <table>
@@ -31,32 +37,32 @@ function FirstTask({ users, deleteUser, deleteAllUsers, sortBySalary, editUser, 
           <tr>
             <th>Imie</th>
             <th>Nazwisko</th>
-            <SortTable sortBySalary={sortBySalary} users={users} />
+            <SortTable usersData = {usersData}/>
             <th>Lista_umiejetnosci</th>
           </tr>
         </thead>
-        {users.map((user, index) => {
+        {usersData.map((user, index) => {
           return (
             <tbody key={index}>
               <tr>
-                <EditUserValue sumSalary={sumSalary} users={users} userData={user.name} index={index} editUser={editUser} name="name" state={editState} setEditState={setEditState} />
-                <EditUserValue sumSalary={sumSalary} users={users} userData={user.surname} index={index} editUser={editUser} name="surname" state={editState} setEditState={setEditState} />
-                <EditUserValue sumSalary={sumSalary} users={users} userData={user.salary} index={index} editUser={editUser} name="salary" state={editState} setEditState={setEditState} />
+                <EditUserValue  users={usersData} userData={user.name} index={index} name="name" state={editState} setEditState={setEditState} />
+                <EditUserValue  users={usersData} userData={user.surname} index={index}  name="surname" state={editState} setEditState={setEditState} />
+                <EditUserValue  users={usersData} userData={user.salary} index={index}  name="salary" state={editState} setEditState={setEditState} />
                 {/* to do edycje skilli i usuwanie skilli a nastepenie refactor z contexty */}
                 <td className="skills">
                   {Object.keys(user.skills).map((skill) => (
-                    <EditUserSkills sumUserSkills={sumUserSkills} skillNames={skillNames} users={users} userData={user} index={index} editUser={editUser} skill={skill} state={editState} setEditState={setEditState} editSkills={editSkills} deleteSkill={deleteSkill} />
+                    <EditUserSkills users={usersData} userData={user} index={index}  skill={skill} state={editState} setEditState={setEditState}   />
                   ))}
-                  <AddSkillBtn addSkill={addSkill} userData={user} index={index} editUser={editUser} state={editState} setEditState={setEditState} editSkills={editSkills} />
+                  <AddSkillBtn userData={user} index={index} state={editState} setEditState={setEditState}  />
                 </td>
                 <td>
-                  <DeleteUserButton deleteUser={deleteUser} index={index} />
+                  <DeleteUserButton index={index} />
                 </td>
               </tr>
             </tbody>
           );
         })}
-        <FourthTask skillNames={skillNames} salarySum={salarySum} sumUserSkills={sumUserSkills} sumSalary={sumSalary} state={editState} setEditState={setEditState} users={users} deleteAllUsers={deleteAllUsers} />
+        <FourthTask users={usersData} />
       </table>
     </div>
   );

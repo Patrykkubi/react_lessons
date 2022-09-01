@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import TableContext from "./TableContext";
 
-const AddSkillBtn = ({ userData, index, state, setEditState, addSkill }) => {
+const AddSkillBtn = ({ index, state, setEditState }) => {
   const [newSkillName, setNewSkillName] = useState();
   const [newSkillValue, setNewSkillValue] = useState();
 
+const {addSkill} = useContext(TableContext);
   return (
     <>
       {state != index + "#0000cc" ? (
@@ -18,9 +20,9 @@ const AddSkillBtn = ({ userData, index, state, setEditState, addSkill }) => {
         <td onClick={(e) => {}}>
           <form>
             Skill name:
-            <input onChange={(e) => setNewSkillName(e.target.value)} type="text" name="skillName" id="skillName" />
+            <input onChange={(e) => setNewSkillName(e.target.value)} type="text" name="skillName" id="skillName"/>
             Skill value:
-            <input onChange={(e) => setNewSkillValue(e.target.value)} type="number" name="skillValue" id="skillValue" />
+            <input onChange={(e) => setNewSkillValue(e.target.value)} type="number" name="skillValue" id="skillValue"/>
             <input
               type="submit"
               onClick={(e) => {

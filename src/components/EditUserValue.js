@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
-
-const EditUserValue = ({ users, userData, editUser, index, name, state, setEditState, sumSalary }) => {
+import { useContext } from "react";
+import TableContext from "./TableContext";
+//users to cala tablica users
+//userData to poszczegolne dane dla kazdego edita
+const EditUserValue = ({ users, userData,  index, name, state, setEditState }) => {
   const [newValue, setNewValue] = useState();
+
+  const {editUser} = useContext(TableContext);
+  const {sumSalary} = useContext(TableContext);
 
   useEffect(() => {
     sumSalary(users);
@@ -30,7 +36,7 @@ const EditUserValue = ({ users, userData, editUser, index, name, state, setEditS
           }}
         >
           <form>
-            <input onChange={(e) => setNewValue(e.target.value)} defaultValue={newValue} type={name == "salary" ? "number" : "text"} name={name} id="name" />
+            <input onChange={(e) => setNewValue(e.target.value)} defaultValue={newValue} type={name == "salary" ? "number" : "text"} name={name} id="name"/>
             <input
               type="submit"
               onClick={(e) => {
