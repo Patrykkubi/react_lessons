@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import TableContext from "./TableContext";
 
-const Form = () => {
-
-  const {updateUsers} = useContext(TableContext);
+const AddUserForm = () => {
+  const { updateUsers } = useContext(TableContext);
   //const [1 zmienna to tablica z naszymi danymi, 2 to funkcja ktora updatuje wartosci forma]
   const [skillName, setSkillName] = useState("");
   const [skillValue, setSkillValue] = useState("");
@@ -65,4 +63,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default AddUserForm;

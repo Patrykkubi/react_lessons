@@ -1,18 +1,17 @@
 import { useContext, useState } from "react";
 import { useEffect } from "react";
-import DeleteAllUsersButton from "./DeleteAllUsersButton";
+import DeleteAllUsersBtn from "./DeleteAllUsersBtn";
 import TableContext from "./TableContext";
 
-const FourthTask = ({ users }) => {
+const TableStatsSummary = ({ users }) => {
+  const { skillNames } = useContext(TableContext);
+  const { sumUserSkills } = useContext(TableContext);
+  const { sumSalary } = useContext(TableContext);
+  const { salarySum } = useContext(TableContext);
 
-  const {skillNames}= useContext(TableContext);
-  const {sumUserSkills} = useContext(TableContext);
-  const {sumSalary} = useContext(TableContext);
-  const {salarySum} = useContext(TableContext);
+  console.log(skillNames);
 
-  console.log(skillNames)
-
-    useEffect(() => {
+  useEffect(() => {
     sumUserSkills(users);
     sumSalary(users);
   }, [users]);
@@ -28,10 +27,10 @@ const FourthTask = ({ users }) => {
             return `${skill}: ${skillNames[skill]}\n`;
           })}
         </td>
-        <DeleteAllUsersButton />
+        <DeleteAllUsersBtn />
       </tr>
     </tfoot>
   );
 };
 
-export default FourthTask;
+export default TableStatsSummary;

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import TableContext from "./TableContext";
 
-const DeleteUserButton = ({ index }) => {
-  const {deleteUser} = useContext(TableContext);
+const DeleteUserBtn = ({ index }) => {
+  const { deleteUser } = useContext(TableContext);
 
   const delUser = () => {
     const warning = window.confirm("Are you sure you want to delete this user ?");
@@ -21,4 +21,4 @@ const DeleteUserButton = ({ index }) => {
   );
 };
 
-export default DeleteUserButton;
+export default DeleteUserBtn;

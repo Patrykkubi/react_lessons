@@ -5,10 +5,10 @@ import TableContext from "./TableContext";
 const EditUserSkills = ({ users, userData, index, skill, state, setEditState }) => {
   const [newSkillName, setNewSkillName] = useState();
   const [newSkillValue, setNewSkillValue] = useState();
-  
-  const {sumUserSkills} = useContext(TableContext);
-  const {editSkills} = useContext(TableContext);
-  const {deleteSkill} = useContext(TableContext);
+
+  const { sumUserSkills } = useContext(TableContext);
+  const { editSkills } = useContext(TableContext);
+  const { deleteSkill } = useContext(TableContext);
 
   useEffect(() => {
     sumUserSkills(users);
