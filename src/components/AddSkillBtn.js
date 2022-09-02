@@ -30,7 +30,6 @@ const AddSkillBtn = ({ index, state, setEditState }) => {
                 setEditState(0);
                 setNewSkillName();
                 setNewSkillValue();
-                console.log(newSkillName);
               }}
             />
           </form>

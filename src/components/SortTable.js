@@ -2,10 +2,9 @@ import { useContext, useState } from "react";
 import { useEffect } from "react";
 import TableContext from "./TableContext";
 
-const SortTable = ({usersData}) => {
-
-const {sortBySalary} = useContext(TableContext);
-const [state, setState] = useState(1);
+const SortTable = ({ usersData }) => {
+  const { sortBySalary } = useContext(TableContext);
+  const [state, setState] = useState(1);
 
   const sortTable = () => {
     if (state == 1) {

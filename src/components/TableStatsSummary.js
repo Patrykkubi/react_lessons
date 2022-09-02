@@ -9,8 +9,6 @@ const TableStatsSummary = ({ users }) => {
   const { sumSalary } = useContext(TableContext);
   const { salarySum } = useContext(TableContext);
 
-  console.log(skillNames);
-
   useEffect(() => {
     sumUserSkills(users);
     sumSalary(users);

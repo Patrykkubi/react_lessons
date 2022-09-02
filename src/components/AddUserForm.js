@@ -4,7 +4,7 @@ import TableContext from "./TableContext";
 
 const AddUserForm = () => {
   const { updateUsers } = useContext(TableContext);
-  //const [1 zmienna to tablica z naszymi danymi, 2 to funkcja ktora updatuje wartosci forma]
+
   const [skillName, setSkillName] = useState("");
   const [skillValue, setSkillValue] = useState("");
   const [userSkillNames, setUserSkillNames] = useState([]);
@@ -28,7 +28,6 @@ const AddUserForm = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     updateUsers(formData);
     setUserSkillNames([]);
     setFormData({ ...formData, skills: {} });

@@ -71,7 +71,6 @@ const users = [
 ];
 
 export function TableProvider({ children }) {
-  //tutaj deklarujemy zmienne i funkcje
   const [usersData, setUsersData] = useState(users);
   const [unsortedUsers, setUnsortedUsers] = useState(users);
 
@@ -100,14 +99,12 @@ export function TableProvider({ children }) {
   const sortBySalary = (status) => {
     if (status == 1) {
       let ascUser = [];
-      // setUsersData(usersData.sort(function (a, b) {  return a.salary - b.salary;  }));
       ascUser = usersData.slice().sort(function (a, b) {
         return a.salary - b.salary;
       });
       setUsersData(ascUser);
     } else if (status == 2) {
       let descUser = [];
-      //setUsersData(usersData.sort(function (a, b) {  return a.salary + b.salary;  }));
       descUser = usersData.slice().sort(function (a, b) {
         return b.salary - a.salary;
       });
@@ -120,7 +117,6 @@ export function TableProvider({ children }) {
   const editUser = (e, index, newValue, key) => {
     e.preventDefault();
     usersData[index][key] = newValue;
-    //setEditedValue();
   };
 
   const editSkills = (e, index, newSkillName, newSkillValue) => {
